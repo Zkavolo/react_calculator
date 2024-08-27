@@ -1,4 +1,5 @@
 import React from "react";
+import { operators } from "../constants/operators";
 
 class Calculator extends React.Component {
   constructor(props) {
@@ -34,9 +35,20 @@ class Calculator extends React.Component {
           });
           break;
         default:
-          this.setState({
-            displayInput: displayInput + key,
-          });
+          if (
+            operators.includes(key) &&
+            displayInput.length > 0 &&
+            operators.includes(displayInput.slice(-1))
+          ) {
+            this.setState({
+              displayInput: displayInput.slice(0, -1) + key,
+            });
+          } else {
+            this.setState({
+              displayInput: displayInput + key,
+            });
+          }
+
           break;
       }
     } catch (error) {
