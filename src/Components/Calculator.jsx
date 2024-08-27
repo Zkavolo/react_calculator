@@ -35,7 +35,39 @@ class Calculator extends React.Component {
           });
           break;
         default:
-          if (
+          if (displayInput.length === 0 && operators.includes(key)) {
+            this.setState({
+              displayInput: "",
+            });
+          } else if (
+            displayInput.slice(-1) === "." &&
+            (key === "." || !key === operators)
+          ) {
+            this.setState({
+              displayInput: displayInput,
+            });
+          } else if (
+            displayInput.slice(-1) === "0" &&
+            (key !== "." || !key === operators)
+          ) {
+            this.setState({
+              displayInput: displayInput,
+            });
+          } else if (
+            displayInput.slice(-1) === "(" &&
+            (key === ")" || key === "(")
+          ) {
+            this.setState({
+              displayInput: displayInput,
+            });
+          } else if (
+            displayInput.slice(-1) === ")" &&
+            (!operators.includes(key) || key === ")" || key === "(")
+          ) {
+            this.setState({
+              displayInput: displayInput,
+            });
+          } else if (
             operators.includes(key) &&
             displayInput.length > 0 &&
             operators.includes(displayInput.slice(-1))
